@@ -1,22 +1,22 @@
-import React, { ReactNode } from "react";
-import { View, Image, Text } from "react-native";
-import { BorderlessButton } from "react-native-gesture-handler";
-import backIcon from "../../assets/images/icons/back.png";
-import logoImg from "../../assets/images/logo.png";
-import styles from "./styles";
-import { useNavigation } from "@react-navigation/native";
+import React, { ReactNode } from 'react'
+import { View, Image, Text } from 'react-native'
+import { BorderlessButton } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
+import backIcon from '../../assets/images/icons/back.png'
+import logoImg from '../../assets/images/logo.png'
+import styles from './styles'
 
 interface PageHeaderProps {
-  title: string;
-  headerRight?: ReactNode;
+  title: string
+  headerRight?: ReactNode
 }
 
-const PageHeader: React.FC<PageHeaderProps> = (props) => {
-  const { title, headerRight, children } = props;
-  const { navigate } = useNavigation();
+const PageHeader: React.FC<PageHeaderProps> = props => {
+  const { title, headerRight, children } = props
+  const { navigate } = useNavigation()
 
   function handleGoBack() {
-    navigate("Landing");
+    navigate('Landing')
   }
 
   return (
@@ -37,7 +37,7 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
 
       {children}
     </View>
-  );
-};
+  )
+}
 
-export default PageHeader;
+export default PageHeader

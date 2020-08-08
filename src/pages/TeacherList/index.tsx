@@ -1,50 +1,50 @@
-import React, { useState } from "react";
-import { View, ScrollView, Text, TextInput } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import { BorderlessButton, RectButton } from "react-native-gesture-handler";
-import AsyncStorage from "@react-native-community/async-storage";
-import PageHeader from "../../components/PageHeader";
-import TeacherItem, { Teacher } from "../../components/TeacherItem";
-import api from "../../services/api";
-import styles from "./styles";
+import React, { useState } from 'react'
+import { View, ScrollView, Text, TextInput } from 'react-native'
+import { Feather } from '@expo/vector-icons'
+import { BorderlessButton, RectButton } from 'react-native-gesture-handler'
+import AsyncStorage from '@react-native-community/async-storage'
+import PageHeader from '../../components/PageHeader'
+import TeacherItem, { Teacher } from '../../components/TeacherItem'
+import api from '../../services/api'
+import styles from './styles'
 
 function TeacherList() {
-  const [teachers, setTeachers] = useState([]);
-  const [favorites, setFavorites] = useState<number[]>([]);
-  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
-  const [subject, setSubject] = useState("");
-  const [week_day, setWeek_day] = useState("");
-  const [time, setTime] = useState("");
+  const [teachers, setTeachers] = useState([])
+  const [favorites, setFavorites] = useState<number[]>([])
+  const [isFiltersVisible, setIsFiltersVisible] = useState(false)
+  const [subject, setSubject] = useState('')
+  const [week_day, setWeek_day] = useState('')
+  const [time, setTime] = useState('')
 
   function handleToggleFiltersVisible() {
-    setIsFiltersVisible(!isFiltersVisible);
+    setIsFiltersVisible(!isFiltersVisible)
   }
 
   function loadFavorites() {
-    AsyncStorage.getItem("favorites").then((response) => {
+    AsyncStorage.getItem('favorites').then(response => {
       if (response) {
-        const favoritedTeachers = JSON.parse(response);
+        const favoritedTeachers = JSON.parse(response)
         const favoritedTeachersIds = favoritedTeachers.map(
           (teacher: Teacher) => teacher.id
-        );
-        setFavorites(favoritedTeachersIds);
+        )
+        setFavorites(favoritedTeachersIds)
       }
-    });
+    })
   }
 
   async function handleFiltersSubmit() {
-    loadFavorites();
+    loadFavorites()
 
-    const response = await api.get("classes", {
+    const response = await api.get('classes', {
       params: {
         subject,
         week_day,
         time,
       },
-    });
+    })
 
-    setIsFiltersVisible(false);
-    setTeachers(response.data);
+    setIsFiltersVisible(false)
+    setTeachers(response.data)
   }
 
   return (
@@ -63,7 +63,7 @@ function TeacherList() {
             <TextInput
               style={styles.input}
               value={subject}
-              onChangeText={(text) => setSubject(text)}
+              onChangeText={text => setSubject(text)}
               placeholder="Qual a matéria?"
               placeholderTextColor="#c1bcc"
             />
@@ -74,7 +74,7 @@ function TeacherList() {
                 <TextInput
                   style={styles.input}
                   value={week_day}
-                  onChangeText={(text) => setWeek_day(text)}
+                  onChangeText={text => setWeek_day(text)}
                   placeholder="Qual o dia?"
                   placeholderTextColor="#c1bcc"
                 />
@@ -85,7 +85,7 @@ function TeacherList() {
                 <TextInput
                   style={styles.input}
                   value={time}
-                  onChangeText={(text) => setTime(text)}
+                  onChangeText={text => setTime(text)}
                   placeholder="Qual horário?"
                   placeholderTextColor="#c1bcc"
                 />
@@ -115,11 +115,11 @@ function TeacherList() {
               teacher={teacher}
               favorited={favorites.includes(teacher.id)}
             />
-          );
+          )
         })}
       </ScrollView>
     </View>
-  );
+  )
 }
 
-export default TeacherList;
+export default TeacherList

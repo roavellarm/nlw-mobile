@@ -1,15 +1,15 @@
-import React from "react";
-import { View, ImageBackground, Text } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
-import bgImage from "../../assets/images/give-classes-background.png";
-import styles from "./styles";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react'
+import { View, ImageBackground, Text } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
+import bgImage from '../../assets/images/give-classes-background.png'
+import styles from './styles'
 
 function GiveClasses() {
-  const { goBack } = useNavigation();
+  const { goBack } = useNavigation()
 
   function handleNavigateBack() {
-    goBack();
+    goBack()
   }
 
   return (
@@ -29,7 +29,7 @@ function GiveClasses() {
         <Text style={styles.okButtonText}>Tudo bem</Text>
       </RectButton>
     </View>
-  );
+  )
 }
 
-export default GiveClasses;
+export default GiveClasses
